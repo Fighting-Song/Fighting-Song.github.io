@@ -6,14 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Fighting-Song</title>
+  <title>JDBC | Fighting-Song</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Fighting-Song">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="JDBC">
+<meta property="og:url" content="http://example.com/2020/10/15/JDBC/index.html">
 <meta property="og:site_name" content="Fighting-Song">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-15T13:40:48.421Z">
+<meta property="article:modified_time" content="2020-10-15T07:24:40.659Z">
 <meta property="article:author" content="Fighting-Song">
+<meta property="article:tag" content="随笔">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Fighting-Song" type="application/atom+xml">
@@ -157,24 +160,31 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-    <article id="post-使用技巧以及快捷键" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+<article id="post-JDBC" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/15/%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BB%A5%E5%8F%8A%E5%BF%AB%E6%8D%B7%E9%94%AE/">快捷键使用</a>
+    <h1 class="article-title" itemprop="name">
+      JDBC
     </h1>
   
 
         <!--显示阅读次数-->
 
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+            阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+  </span>
+  </a>
+
 <!--显示阅读次数完毕-->
         
-        <a href="/2020/10/15/%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BB%A5%E5%8F%8A%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="archive-article-date">
-  	<time datetime="2020-10-15T13:40:48.450Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-15</time>
+        <a href="/2020/10/15/JDBC/" class="archive-article-date">
+  	<time datetime="2020-10-15T13:40:48.421Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-15</time>
 </a>
         
       </header>
@@ -182,11 +192,73 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-        
-          <a class="article-more-a" href="/2020/10/15/%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BB%A5%E5%8F%8A%E5%BF%AB%E6%8D%B7%E9%94%AE/#more">more >></a>
-        
+<a id="more"></a>
+
+<h1 id="一-JDBC规范"><a href="#一-JDBC规范" class="headerlink" title="一:JDBC规范"></a>一:JDBC规范</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">一。JDBC规范调用流程【背】</span><br><span class="line"><span class="number">1.</span>将MySql服务器厂商提供Driver接口实现类注册到JVM</span><br><span class="line">    </span><br><span class="line"><span class="number">2.</span>通过JDBC规范中DriverManager在Java工程与MySql服务器之间建立一个【连接通道】</span><br><span class="line">    </span><br><span class="line"><span class="number">3.</span>通过MySql服务器厂商提供Connection接口实现类建立一个交通工【PreparedStatement】</span><br><span class="line">    </span><br><span class="line"><span class="number">4.</span>通过交通工具【PreparedStatement】将SQL命令从Java工程推送到MySql服务器上执行并带回执行结果</span><br><span class="line">    </span><br><span class="line"><span class="number">5.</span>销毁本次交易过程涉及所有资源对象</span><br><span class="line"></span><br><span class="line">二。JDBC规范下接口介绍：</span><br><span class="line"><span class="number">1.</span>位置：JDBC规范下接口存在于JDK_1.<span class="number">8.</span>jar下java.sql包</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span>分类：</span><br><span class="line">	<span class="number">1</span>）java.sql.DriverManager类：这个类存在于JDK_1.<span class="number">8</span>下。负责将数据库厂商提供</span><br><span class="line">    Driver接口实现进行注册负责在Java工程与MySql服务器之间建立一个【连接通道】</span><br><span class="line">    </span><br><span class="line">	<span class="number">2</span>）java.sql.Connection接口：负责管理Java工程与数据库服务器之间【连接通道】 </span><br><span class="line">	    </span><br><span class="line">	<span class="number">3</span>）java.sql.PreparedStatement接口：负责管理在【连接通道】 上进行往返交通的【交通工具】</span><br><span class="line">    </span><br><span class="line">	<span class="number">4</span>) java.sql.ResultSet接口：负责管理数据库服务器返回【临时表】</span><br><span class="line"></span><br><span class="line">三。ps.executeUpdate  与  ps.executeQuery 区别:</span><br><span class="line"></span><br><span class="line"> <span class="number">1.</span>ps.executeUpdate：</span><br><span class="line">	<span class="number">1</span>） 负责推送插入命令【insert】，更新命令[update]，删除命令[delete]</span><br><span class="line">	<span class="number">2</span>） 返回结果对表文件进行操作时，收到影响行数，比如插入了多少行，更新了多少行删除了多少行</span><br><span class="line">     </span><br><span class="line"> <span class="number">2.</span>ps.executeQuery：</span><br><span class="line">	<span class="number">1</span>） 负责推送查询命令【select  *  from 表名】</span><br><span class="line">	<span class="number">2</span>） 返回结果是查询命令得到【临时表】，在JDBC规范中【临时表】</span><br><span class="line">		交给ResultSet接口实现类管理。实际上返回ResultSet实例对象</span><br></pre></td></tr></table></figure>
+
+<h1 id="二-补充"><a href="#二-补充" class="headerlink" title="二:补充"></a>二:补充</h1><h2 id="1-ResultSet"><a href="#1-ResultSet" class="headerlink" title="1.ResultSet"></a>1.ResultSet</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ResultSet对象----&gt;临时表</span><br><span class="line">   指针---&gt; 			DeptNo  Dname  Loc</span><br><span class="line">    				 <span class="number">10</span>      mike    beijing</span><br><span class="line">    				 <span class="number">20</span>      jack    henan</span><br><span class="line">rs.next()方法:</span><br><span class="line">	next()方法每次执行时,要求指针向下移动一行,如果指针指向位置是一个具体数据行,此时</span><br><span class="line">    next()方法将返回<span class="keyword">true</span>,如果指针指向位置不是一个数据行,此时返回<span class="keyword">false</span></span><br><span class="line">     </span><br><span class="line">    指针只能向下移动,不能向上移动</span><br><span class="line"><span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">    <span class="comment">//读取指针指向数据行中字段信息</span></span><br><span class="line">    <span class="keyword">int</span> deptNo = rs.getInt(<span class="string">&quot;DeptNo&quot;</span>);</span><br><span class="line">    String dname = rs.getString(<span class="string">&quot;Dname&quot;</span>);</span><br><span class="line">    String loc = rs.getString(<span class="string">&quot;Loc&quot;</span>);</span><br><span class="line">&#125;        </span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Batch弹夹"><a href="#2-Batch弹夹" class="headerlink" title="2.Batch弹夹"></a>2.Batch弹夹</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//4.向MySql服务器推送100条数据</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">100</span>;i++)&#123;</span><br><span class="line">    <span class="comment">//通过向预编译SQL命令填充数据生成全新的SQL命令</span></span><br><span class="line">    ps.setInt(<span class="number">1</span>, i); <span class="comment">//inser into dept (deptno,dname,loc) values(1,?,?)</span></span><br><span class="line">    ps.setString(<span class="number">2</span>, <span class="string">&quot;dept_&quot;</span>+i); <span class="comment">//inser into dept (deptno,dname,loc) 	values(1,&#x27;dept_1&#x27;,?)</span></span><br><span class="line">    ps.setString(<span class="number">3</span>, <span class="string">&quot;北京&quot;</span>);<span class="comment">//inser into dept (deptno,dname,loc) values(1,&#x27;dept_1&#x27;,&#x27;北京&#x27;)</span></span><br><span class="line">    <span class="comment">//在新的SQL语句生成之后，将SQL语句作为子弹添加到PS的弹夹</span></span><br><span class="line">    ps.addBatch(); <span class="comment">//[sql1,sql2,...]</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//5.【一次性】通过ps将100条sql语句推送到mysql服务器执行</span></span><br><span class="line">ps.executeBatch(); <span class="comment">// 推送100条SQL命令只需要往返一次</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="DBUtil–老杜"><a href="#DBUtil–老杜" class="headerlink" title="DBUtil–老杜"></a>DBUtil–老杜</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> jdbc001;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* JDBC工具类,简化JDBC编程</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DBUtil</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 工具类中的构造方法都是私有的,</span></span><br><span class="line"><span class="comment">     * 因为工具类中的方法都是静态的,不需要new对象,直接采用类名调用</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    <span class="comment">//放在静态代码块中,静态代码快只在类时执行,并且只执行一次</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span>  <span class="title">DBUtil</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">        <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这里要扔出异常,因为外面释放资源要catch</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        Connection conn = DriverManager.getConnection(<span class="string">&quot;jdbc:mysql://localhost:3306/jdbctext?useSSL=false&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;1207071819&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> conn;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//关闭资源</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    * conn 连接对象</span></span><br><span class="line"><span class="comment">    * ps 数据操作对象</span></span><br><span class="line"><span class="comment">    * rs 结果集</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(Connection conn, Statement ps, ResultSet rs)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (rs != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                rs.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (ps != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                ps.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (conn != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                conn.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="DBUtilText–老杜"><a href="#DBUtilText–老杜" class="headerlink" title="DBUtilText–老杜"></a>DBUtilText–老杜</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> jdbc001;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 第一:测试DBUtil是否好用</span></span><br><span class="line"><span class="comment">* 第二:模糊查询怎么写?</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DBUtilText</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Connection conn=<span class="keyword">null</span>;</span><br><span class="line">        PreparedStatement ps=<span class="keyword">null</span>;<span class="comment">//这里使用preparedStatement(预编译的数据库操作对象),注意这里preparedStatement有个d,下面有没有</span></span><br><span class="line">        ResultSet rs=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//获取连接</span></span><br><span class="line">            conn=DBUtil.getConnection();</span><br><span class="line">            <span class="comment">//编译预处理对象</span></span><br><span class="line">            <span class="comment">//SQL语句的框子,其中一个?表示一个占位符,一个?将来接收一个&quot;值&quot;,注意:占位符不能使用单引号括起来</span></span><br><span class="line">            String sql=<span class="string">&quot;select realName from t_user where loginPwd like ?&quot;</span>;</span><br><span class="line">            ps=conn.prepareStatement(sql);<span class="comment">//这里prepareStatement,没有d</span></span><br><span class="line">            <span class="comment">//给占位符 ? 传值(第一个问号下标是1,第二个问号下标是2,JDBC中所有下标从1开始)</span></span><br><span class="line">            ps.setString(<span class="number">1</span>,<span class="string">&quot;XX%&quot;</span>);</span><br><span class="line">            rs=ps.executeQuery();<span class="comment">//这里面括号一定不要传&quot;sql&quot;这个变量,传进去就还是会发生sql注入</span></span><br><span class="line">            <span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">                System.out.println(rs.getString(<span class="string">&quot;realName&quot;</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">//释放资源</span></span><br><span class="line">            DBUtil.close(conn,ps,rs);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="DBUtil–老杨"><a href="#DBUtil–老杨" class="headerlink" title="DBUtil–老杨"></a>DBUtil–老杨</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.bjpowernode.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  将JDBC规范下相关对象【创建】与【销毁功能】封装到方法</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *   一。JDBC开发步骤：</span></span><br><span class="line"><span class="comment"> *      1.注册数据库服务器提供的Driver接口实现类</span></span><br><span class="line"><span class="comment"> *      2.创建一个连接通道交给Connection接口的实例对象【JDBC4Connection】管理</span></span><br><span class="line"><span class="comment"> *      3.创建一个交通工具交给PreparedStatement接口的实例对象【JDBC4PreparedStatement】管理</span></span><br><span class="line"><span class="comment"> *      4.由交通工具在Java工程与数据库服务器之间进行传输，推送SQL命令并带回执行结果</span></span><br><span class="line"><span class="comment"> *      5.交易结束后，销毁相关资源【Connection,PreparedStatement,ResultSet】</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>  Connection con = <span class="keyword">null</span>;<span class="comment">//类文件属性，可以在类文件中所有的方法中使用</span></span><br><span class="line">    <span class="keyword">private</span>  PreparedStatement ps=<span class="keyword">null</span>;<span class="comment">//类文件属性，可以在类文件中所有的方法中使用</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//静态语句块 static&#123;&#125;</span></span><br><span class="line">    <span class="comment">//在当前类文件第一次被加载到JVM时，JVM将会自动调用当前类文件静态语句块</span></span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        <span class="comment">//1.注册数据库服务器提供的Driver接口实现类</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;Driver接口实现类被注册了&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//封装Connection对象创建细节 不需要考虑使用对象创建细节</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  Connection  <span class="title">createCon</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            con = DriverManager.getConnection(<span class="string">&quot;jdbc:mysql://localhost:3306/bjpowernode&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;123&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            System.out.println(<span class="string">&quot;Connection对象创建失败。。。。。&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> con;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//封装PreparedStatement对象创建细节</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> PreparedStatement <span class="title">createStatement</span><span class="params">(String sql)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        Connection con = createCon();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ps = con.prepareStatement(sql);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ps;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//封装PreparedStatement对象与Connection对象销毁细节</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(ps!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                ps.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(con!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                con.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//封装PreparedStatement对象与Connection对象与ResultSet对象销毁细节</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(ResultSet rs)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(rs!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                rs.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="DBUtilText–老杨"><a href="#DBUtilText–老杨" class="headerlink" title="DBUtilText–老杨"></a>DBUtilText–老杨</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.bjpowernode.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.bjpowernode.util.JdbcUtil;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 2020/4/24</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestMain</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">         JdbcUtil util = <span class="keyword">new</span> JdbcUtil();</span><br><span class="line">         PreparedStatement ps=<span class="keyword">null</span>;</span><br><span class="line">         ResultSet rs = <span class="keyword">null</span>;</span><br><span class="line">         Scanner request = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">         String  userName,password,deptNo,dname,loc;</span><br><span class="line">         String  sql_1=<span class="string">&quot;select count(*) from emp where ename=? and empno=?&quot;</span>;</span><br><span class="line">         String  sql_2=<span class="string">&quot;insert into dept (deptNo,dname,loc) values(?,?,?)&quot;</span>;</span><br><span class="line">         <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line">         <span class="comment">//-----登录验证-----start</span></span><br><span class="line">        System.out.println(<span class="string">&quot;请输入用户名&quot;</span>);</span><br><span class="line">        userName = request.next();</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入密码&quot;</span>);</span><br><span class="line">        password = request.next();</span><br><span class="line">        ps = util.createStatement(sql_1);</span><br><span class="line">        ps.setString(<span class="number">1</span>, userName);</span><br><span class="line">        ps.setString(<span class="number">2</span>, password);</span><br><span class="line">        rs = ps.executeQuery();</span><br><span class="line">        <span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">            flag = rs.getInt(<span class="string">&quot;count(*)&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        util.close(rs);</span><br><span class="line">        <span class="keyword">if</span>(flag!=<span class="number">1</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;输入信息不存在，请重新登录。。。。&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//-----登录验证-----end</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//-----具体功能页面---start</span></span><br><span class="line">        System.out.println(<span class="string">&quot;******欢迎使用某某公司部门管理系统******&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;******1.添加部门******&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;******2.查询部门******&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;******3.删除部门******&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;******4.更新部门******&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;******请输入操作******&quot;</span>);</span><br><span class="line">        flag = request.nextInt();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(flag ==<span class="number">1</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;******请输入部门编号******&quot;</span>);</span><br><span class="line">            deptNo =request.next();</span><br><span class="line">            System.out.println(<span class="string">&quot;******请输入部门名称******&quot;</span>);</span><br><span class="line">            dname =request.next();</span><br><span class="line">            System.out.println(<span class="string">&quot;******请输入部门位置******&quot;</span>);</span><br><span class="line">            loc = request.next();</span><br><span class="line"></span><br><span class="line">            ps = util.createStatement(sql_2);</span><br><span class="line">            ps.setInt(<span class="number">1</span>, Integer.valueOf(deptNo));</span><br><span class="line">            ps.setString(<span class="number">2</span>, dname);</span><br><span class="line">            ps.setString(<span class="number">3</span>, loc);</span><br><span class="line">            flag = ps.executeUpdate();</span><br><span class="line">            util.close();</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(flag ==<span class="number">2</span>)&#123;</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(flag ==<span class="number">3</span>)&#123;</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//-----具体功能页面---end</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="DAO创建"><a href="#DAO创建" class="headerlink" title="DAO创建"></a>DAO创建</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DAO类开发规则:</span><br><span class="line">	<span class="number">1</span>):一个DAO类封装的是一张表操作细节</span><br><span class="line">    <span class="number">2</span>):DAO类命名规则:表名+Dao,比如封装emp表操作细节---&gt;EmpDao</span><br><span class="line">        封装Dept表操作细节---&gt;DeptDao</span><br><span class="line">    <span class="number">3</span>):DAO类所在的包命名规:公司网站域名.dao,比如 com.bjpowernode.dao</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.bjpowernode.dao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.bjpowernode.entity.Dept;</span><br><span class="line"><span class="keyword">import</span> com.bjpowernode.util.JdbcUtil;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *   增删改查</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeptDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>  JdbcUtil util = <span class="keyword">new</span> JdbcUtil();</span><br><span class="line">    <span class="comment">//添加数据行</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(String deptNo,String dname,String loc)</span></span>&#123;</span><br><span class="line">        String sql=<span class="string">&quot;insert into dept (deptNo,dname,loc) values(?,?,?)&quot;</span>;</span><br><span class="line">        <span class="keyword">int</span> result=<span class="number">0</span>;</span><br><span class="line">        PreparedStatement ps = util.createStatement(sql);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ps.setInt(<span class="number">1</span>, Integer.valueOf(deptNo));</span><br><span class="line">            ps.setString(<span class="number">2</span>, dname);</span><br><span class="line">            ps.setString(<span class="number">3</span>, loc);</span><br><span class="line">            result=ps.executeUpdate();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            util.close();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//删除数据行</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span><span class="params">(String deptNo)</span></span>&#123;</span><br><span class="line">        String sql =<span class="string">&quot;delete from dept where deptno=?&quot;</span>;</span><br><span class="line">        PreparedStatement ps = util.createStatement(sql);</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ps.setInt(<span class="number">1</span>, Integer.valueOf(deptNo));</span><br><span class="line">            result = ps.executeUpdate();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            util.close();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//更新数据行</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(String deptNo,String dname,String loc)</span></span>&#123;</span><br><span class="line">        String  sql =<span class="string">&quot;update dept set dname=?,loc=? where deptno=?&quot;</span>;</span><br><span class="line">        PreparedStatement ps = util.createStatement(sql);</span><br><span class="line">        <span class="keyword">int</span> result=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ps.setString(<span class="number">1</span>, dname);</span><br><span class="line">            ps.setString(<span class="number">2</span>, loc);</span><br><span class="line">            ps.setInt(<span class="number">3</span>, Integer.valueOf(deptNo));</span><br><span class="line">            result = ps.executeUpdate();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">           util.close();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//查询数据行</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List <span class="title">findAll</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String sql =<span class="string">&quot;select * from dept&quot;</span>;</span><br><span class="line">        PreparedStatement ps = util.createStatement(sql);</span><br><span class="line">        ResultSet rs = <span class="keyword">null</span>;</span><br><span class="line">        List list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            rs = ps.executeQuery();</span><br><span class="line">            <span class="comment">//将是临时表数据行转换为实体类实例对象保管</span></span><br><span class="line">            <span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">                <span class="keyword">int</span> deptNo = rs.getInt(<span class="string">&quot;deptno&quot;</span>);</span><br><span class="line">                String dname = rs.getString(<span class="string">&quot;dname&quot;</span>);</span><br><span class="line">                String loc = rs.getString(<span class="string">&quot;loc&quot;</span>);</span><br><span class="line">                Dept dept = <span class="keyword">new</span> Dept(deptNo, dname, loc);</span><br><span class="line">                list.add(dept);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            util.close(rs);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>).一个实体类用于描述一张表</span><br><span class="line"><span class="number">2</span>).实体类的类名应该于关联的表名保持一致,但是可以忽略大小写</span><br><span class="line">    DEPT.frm---------&gt;<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dept</span></span>&#123;&#125;</span><br><span class="line"><span class="number">3</span>).实体类的属性应该和关联的表文件字段保持一致</span><br><span class="line">    Dept.frm----&gt;DEPRNO INT</span><br><span class="line">    			<span class="function">DNAME <span class="title">VARCHAR</span><span class="params">(<span class="number">20</span>)</span></span></span><br><span class="line"><span class="function">    			LOC <span class="title">VARCHAR</span><span class="params">(<span class="number">20</span>)</span></span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function">    <span class="keyword">public</span> class Dept</span>&#123;</span><br><span class="line">        <span class="keyword">private</span> Integer deptNo;</span><br><span class="line">        <span class="keyword">private</span> String dname;</span><br><span class="line">        <span class="keyword">private</span> String loc;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="number">4</span>).实体类的一个实例对象用于在内存中存储对应的表文件中一个数据行</span><br><span class="line">    Dept.frm------------------&gt;JVM内</span><br><span class="line">    DeptNo dname 	loc          </span><br><span class="line">    <span class="number">10</span>	   Account  NEW York     Dept dept1 = <span class="keyword">new</span> Dept(<span class="number">10</span>,<span class="string">&quot;Account&quot;</span>,<span class="string">&quot;NEW York&quot;</span>);</span><br><span class="line">    <span class="number">20</span>	   Sales    BeiJing      Dept dept2 = <span class="keyword">new</span> Dept(<span class="number">20</span>,<span class="string">&quot;Sales&quot;</span>,<span class="string">&quot;BeiJing&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.bjpowernode.entity;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 2020/4/24</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dept</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer deptNo;</span><br><span class="line">    <span class="keyword">private</span> String  dname;</span><br><span class="line">    <span class="keyword">private</span> String  loc;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getDeptNo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> deptNo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDeptNo</span><span class="params">(Integer deptNo)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.deptNo = deptNo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDname</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> dname;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDname</span><span class="params">(String dname)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.dname = dname;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getLoc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> loc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLoc</span><span class="params">(String loc)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.loc = loc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Dept</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Dept</span><span class="params">(Integer deptNo, String dname, String loc)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.deptNo = deptNo;</span><br><span class="line">        <span class="keyword">this</span>.dname = dname;</span><br><span class="line">        <span class="keyword">this</span>.loc = loc;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>查询</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查询数据行</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> List <span class="title">findAll</span><span class="params">()</span></span>&#123;</span><br><span class="line">       String sql =<span class="string">&quot;select * from dept&quot;</span>;</span><br><span class="line">       PreparedStatement ps = util.createStatement(sql);</span><br><span class="line">       ResultSet rs = <span class="keyword">null</span>;</span><br><span class="line">       List list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           rs = ps.executeQuery();</span><br><span class="line">           <span class="comment">//将是临时表数据行转换为实体类实例对象保管</span></span><br><span class="line">           <span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">               <span class="keyword">int</span> deptNo = rs.getInt(<span class="string">&quot;deptno&quot;</span>);</span><br><span class="line">               String dname = rs.getString(<span class="string">&quot;dname&quot;</span>);</span><br><span class="line">               String loc = rs.getString(<span class="string">&quot;loc&quot;</span>);</span><br><span class="line">               Dept dept = <span class="keyword">new</span> Dept(deptNo, dname, loc);</span><br><span class="line">               list.add(dept);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">           util.close(rs);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> list;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechatshou.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -206,16 +278,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/15/%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E4%BB%A5%E5%8F%8A%E5%BF%AB%E6%8D%B7%E9%94%AE/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data==http://fighting-song.github.io/020/10/15/JDBC/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/10/15/jQurey/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          jQurey
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/10/15/JavaScript/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -230,729 +370,34 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Vue复习补充" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/15/Vue%E5%A4%8D%E4%B9%A0%E8%A1%A5%E5%85%85/">Vue复习补充</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-        
-        <a href="/2020/10/15/Vue%E5%A4%8D%E4%B9%A0%E8%A1%A5%E5%85%85/" class="archive-article-date">
-  	<time datetime="2020-10-15T13:40:48.447Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-        
-          <a class="article-more-a" href="/2020/10/15/Vue%E5%A4%8D%E4%B9%A0%E8%A1%A5%E5%85%85/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/15/Vue%E5%A4%8D%E4%B9%A0%E8%A1%A5%E5%85%85/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80-JDBC%E8%A7%84%E8%8C%83"><span class="toc-number">1.</span> <span class="toc-text">一:JDBC规范</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C-%E8%A1%A5%E5%85%85"><span class="toc-number">2.</span> <span class="toc-text">二:补充</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-ResultSet"><span class="toc-number">2.1.</span> <span class="toc-text">1.ResultSet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Batch%E5%BC%B9%E5%A4%B9"><span class="toc-number">2.2.</span> <span class="toc-text">2.Batch弹夹</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DBUtil%E2%80%93%E8%80%81%E6%9D%9C"><span class="toc-number">3.</span> <span class="toc-text">DBUtil–老杜</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DBUtilText%E2%80%93%E8%80%81%E6%9D%9C"><span class="toc-number">4.</span> <span class="toc-text">DBUtilText–老杜</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DBUtil%E2%80%93%E8%80%81%E6%9D%A8"><span class="toc-number">5.</span> <span class="toc-text">DBUtil–老杨</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DBUtilText%E2%80%93%E8%80%81%E6%9D%A8"><span class="toc-number">6.</span> <span class="toc-text">DBUtilText–老杨</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DAO%E5%88%9B%E5%BB%BA"><span class="toc-number">7.</span> <span class="toc-text">DAO创建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E4%BD%93%E7%B1%BB"><span class="toc-number">8.</span> <span class="toc-text">实体类</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
-  
-    <article id="post-Vuejs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/15/Vuejs/">Vuejs</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-        
-        <a href="/2020/10/15/Vuejs/" class="archive-article-date">
-  	<time datetime="2020-10-15T13:40:48.444Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-        
-          <a class="article-more-a" href="/2020/10/15/Vuejs/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/15/Vuejs/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-SSM知识点集合" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/15/SSM%E7%9F%A5%E8%AF%86%E7%82%B9%E9%9B%86%E5%90%88/">SSM知识点集合</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-        
-        <a href="/2020/10/15/SSM%E7%9F%A5%E8%AF%86%E7%82%B9%E9%9B%86%E5%90%88/" class="archive-article-date">
-  	<time datetime="2020-10-15T13:40:48.441Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-        
-          <a class="article-more-a" href="/2020/10/15/SSM%E7%9F%A5%E8%AF%86%E7%82%B9%E9%9B%86%E5%90%88/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/15/SSM%E7%9F%A5%E8%AF%86%E7%82%B9%E9%9B%86%E5%90%88/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Servlet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/15/Servlet/">Servlet</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-        
-        <a href="/2020/10/15/Servlet/" class="archive-article-date">
-  	<time datetime="2020-10-15T13:40:48.438Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-        
-          <a class="article-more-a" href="/2020/10/15/Servlet/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/15/Servlet/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mysql" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/15/mysql/">mysql</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-        
-        <a href="/2020/10/15/mysql/" class="archive-article-date">
-  	<time datetime="2020-10-15T13:40:48.436Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-        
-          <a class="article-more-a" href="/2020/10/15/mysql/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/15/mysql/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-MayBatis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/15/MayBatis/">MayBatis</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-        
-        <a href="/2020/10/15/MayBatis/" class="archive-article-date">
-  	<time datetime="2020-10-15T13:40:48.433Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-        
-          <a class="article-more-a" href="/2020/10/15/MayBatis/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/15/MayBatis/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Linux" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/15/Linux/">Linux</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-        
-        <a href="/2020/10/15/Linux/" class="archive-article-date">
-  	<time datetime="2020-10-15T13:40:48.430Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-        
-          <a class="article-more-a" href="/2020/10/15/Linux/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/15/Linux/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-JSP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/15/JSP/">JSP</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-        
-        <a href="/2020/10/15/JSP/" class="archive-article-date">
-  	<time datetime="2020-10-15T13:40:48.427Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-        
-          <a class="article-more-a" href="/2020/10/15/JSP/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/15/JSP/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-jQurey" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/15/jQurey/">jQurey</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-        
-        <a href="/2020/10/15/jQurey/" class="archive-article-date">
-  	<time datetime="2020-10-15T13:40:48.424Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-        
-          <a class="article-more-a" href="/2020/10/15/jQurey/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/15/jQurey/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
-    </nav>
   
+
+  
+
+  
+
+  
+
 
 
           </div>
@@ -974,8 +419,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
